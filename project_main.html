@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../../../favicon.ico">
+    <script src="resources/js/project_main.js"></script>
+    <title>STAK | Study Tool</title>
+    <script src="resources/js/localStorage.js"></script>
+    <!-- Bootstrap core CSS -->
+    <link href="venders/css/bootstrap/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom Style -->
+    <link href='resources/css/main.css' rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,700,900" rel="stylesheet">
+</head>
+
+
+<body class="bg-light" onload=loadProject()>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="index.html">
+            <div class="row">
+                <div class="small_title col-xs-12">
+                    <h1>Stak <span class="thin_title"><span class="vertical_line">|</span>Study Tool</span>
+                    </h1>
+                </div>
+
+            </div>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="new_project.html">new<span class="sr-only"></span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="open_project.html">open <span class="sr-only"></span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" onclick="save()">save <span class="sr-only"></span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="file:///">save as <span class="sr-only"></span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="scanner_tool.html">scan <span class="sr-only"></span></a>
+                </li>
+              <li class="nav-item">
+                    <a class="nav-link" href="project_main.html">project <span class="sr-only"></span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="assets.html">assets <span class="sr-only"></span></a>
+                </li>
+                
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+        <h3 id=title1><span class="thin_text"></span></h3>
+        <p id="due_date1"></p>
+        <div class="line-break"></div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-3 center-block"><button type="button" onclick="requirements()" class="nav-btn btn btn-outline-dark top-btn ">Requirements</button></div>
+            <div class="col-3 center-block"><button type="button" onclick="calendar()" class="nav-btn btn btn-outline-dark top-btn">Calendar</button></div>
+            <div class="col-3 center-block"><button type="button" onclick="tools_hide()" class="nav-btn btn btn-outline-dark top-btn">Tools</button>
+            </div>
+                        <a href="assets.html"><div class="col-3 center-block"><button type="button" class="nav-btn btn btn-outline-dark top-btn">Assets</button></a>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row" id="tool_popup">
+            <div class="col-3 popup"><button type="button" onclick="summarize()"class="btn btn-primary nav-btn btn btn-outline-dark top-btn">
+ Summarize
+    </button>
+            </div>
+            <div class="col-3 popup"><button type="button" class="btn btn-primary nav-btn btn btn-outline-dark top-btn" data-toggle="modal" data-target="#plagiarism">
+ Plagiarism Check
+    </button>
+            </div>
+            <div class="col-3 popup"><button type="button" class="btn btn-primary nav-btn btn btn-outline-dark top-btn " onclick="addReferenceText()" data-toggle="modal" data-target="#addReference">
+ Add Reference
+    </button>
+            </div>
+                  <div class="col-3 popup"><button type="button" class="btn btn-primary nav-btn btn btn-outline-dark top-btn " onclick="retrieveScan()">
+ Retrieve Scan
+    </button>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="modal fade" id="plagiarism" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content mt-3">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel"></h5> <label for="example-text-input" class="col-2 col-form-label">Warning!</label>
+                    <div class="col-10">
+                        <ul>
+                            <li class="small" id="plagiarism-url"><a href="https://enginess.io/insights/6-principles-design-la-donald-norman">https://enginess.io/insights/6-principles-design-la-donald-norman</a></li>
+                            <li class="small" id="plagiarism-input">Norman outlines six key principles: visibility, feedback, constraints, mapping, consistency and affordances.</li>
+                        </ul>
+                    </div>
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="addReference" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content mt-3">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add reference</h5> <label for="example-text-input" class="col-2 col-form-label"></label>
+                    <div class="col-10">
+                        <input class="form-control" id="urlInput" type="text" value="" placeholder="Enter reference URL here" id="example-text-input">
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="addReferenceUrl()" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12" id="insert_nav">
+                <iframe id="calendar_hide" src="https://calendar.google.com/calendar/embed?showNav=0&amp;showPrint=0&amp;showTabs=0&amp;showCalendars=0&amp;showTz=0&amp;height=180&amp;wkst=2&amp;bgcolor=%23FFFFFF&amp;src=fl7qel7q2h208cag30gqpg4pq4%40group.calendar.google.com&amp;color=%23182C57&amp;ctz=Australia%2FDarwin" style="border:solid 1px #777" width="250" height="180" frameborder="0" scrolling="no"></iframe>
+                <ul class="view_toggle" id='req_list'></ul>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="main_screen">
+                    <textarea name="Text1" id="textbox" cols="40" rows="21" class="warning">"This is the example text, this shows the features of STAK. With STAK you can add references like this one.
+
+YOU CAN CHECK FOR PLAGIARISM:
+
+Norman outlines six key principles: visibility, feedback, constraints, mapping, consistency and affordances.
+                        
+YOU CAN CHECK ALSO SUMMARIZE:
+                    
+A decline in standardized test scores is but the most recent indicator that American education is in trouble.
+
+One reason for the crisis is that present mandatory-attendance laws force many to attend school who have no wish to be there. Such children have little desire to learn and are so antagonistic to school that neither they nor more highly motivated students receive the quality education that is the birthright of every American.
+
+The solution to this problem is simple: Abolish compulsory-attendance laws and allow only those who are committed to getting an education to attend.
+
+This will not end public education. Contrary to conventional belief, legislators enacted compulsory-attendance laws to legalize what already existed. William Landes and Lewis Solomon, economists, found little evidence that mandatory-attendance laws increased the number of children in school. They found, too, that school systems have never effectively enforced such laws, usually because of the expense involved.
+
+There is no contradiction between the assertion that compulsory attendance has had little effect on the number of children attending school and the argument that repeal would be a positive step toward improving education. Most parents want a high school education for their children. Unfortunately, compulsory attendance hampers the ability of public school officials to enforce legitimate educational and disciplinary policies and thereby make the education a good one.
+
+Private schools have no such problem. They can fail or dismiss students, knowing such students can attend public school. Without compulsory attendance, public schools would be freer to oust students whose academic or personal behavior undermines the educational mission of the institution.
+
+Has not the noble experiment of a formal education for everyone failed? While we pay homage to the homily, "You can lead a horse to water but you can't make him drink," we have pretended it is not true in education.
+
+Ask high school teachers if recalcitrant students learn anything of value. Ask teachers if these students do any homework. Quite the contrary, these students know they will be passed from grade to grade until they are old enough to quit or until, as is more likely, they receive a high school diploma. At the point when students could legally quit, most choose to remain since they know they are likely to be allowed to graduate whether they do acceptable work or not.
+
+Abolition of archaic attendance laws would produce enormous dividends.
+
+First, it would alert everyone that school is a serious place where one goes to learn. Schools are neither day-care centers nor indoor street corners. Young people who resist learning should stay away; indeed, an end to compulsory schooling would require them to stay away.
+
+Second, students opposed to learning would not be able to pollute the educational atmosphere for those who want to learn. Teachers could stop policing recalcitrant students and start educating.
+
+Third, grades would show what they are supposed to: how well a student is learning. Parents could again read report cards and know if their children were making progress.
+
+Fourth, public esteem for schools would increase. People would stop regarding them as way stations for adolescents and start thinking of them as institutions for educating America's youth.
+
+Fifth, elementary schools would change because students would find out early they had better learn something or risk flunking out later. Elementary teachers would no longer have to pass their failures on to junior high and high school.
+
+Sixth, the cost of enforcing compulsory education would be eliminated. Despite enforcement efforts, nearly 15 percent of the school-age children in our largest cities are almost permanently absent from school.
+
+Communities could use these savings to support institutions to deal with young people not in school. If, in the long run, these institutions prove more costly, at least we would not confuse their mission with that of schools.
+
+Schools should be for education. At present, they are only tangentially so. They have attempted to serve an all-encompassing social function, trying to be all things to all people. In the process they have failed miserably at what they were originally formed to accomplish.
+                   
+</textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="resources/js/top_nav.js"></script>
+</body>
+
+</html>
